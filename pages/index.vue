@@ -22,11 +22,11 @@ export default {
       callback(null, {
         loadedPosts: [
           {
-          id: "1",
-          title: '最初の投稿',
-          previewText: '最初の投稿',
-          isAdmin: true,
-          thumbnail: 'https://bz-cdn.shoeisha.jp/static/images/article/3449/3449-top.jpg',
+            id: "1",
+            title: '最初の投稿',
+            previewText: '最初の投稿',
+            isAdmin: true,
+            thumbnail: 'https://bz-cdn.shoeisha.jp/static/images/article/3449/3449-top.jpg',
           },
           {
             id: "2",
