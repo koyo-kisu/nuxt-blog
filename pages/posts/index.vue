@@ -57,8 +57,14 @@ export default {
         .catch(e => {
             context.error(e);
         });
+    },
+
+    // コンポーネント生成時に'dispatch()'がトリガーとなって'actions'を実行
+    created() {
+        this.$store.dispatch('setPosts', this.loadedPosts)
+        // console.log(this.$store.getters.loadedPosts)
     }
-}
+};
 </script>
 
 <style scoped>
