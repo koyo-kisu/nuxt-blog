@@ -5,8 +5,10 @@
         <AppButton @click="$router.push('/admin/new-post')">投稿する</AppButton>
       </section>
       <section class="existing_posts">
-        <button>過去の投稿</button>
-        <PostList isAdmin />
+        <h1>過去の投稿</h1>
+        <PostList 
+          isAdmin
+          :posts="loadedPosts" />
       </section>
   </div>
 </template>
@@ -20,6 +22,12 @@ export default {
   components: {
     PostList,
     AppButton,
+  },
+
+  computed: {
+    loadedPosts() {
+      return this.$store.getters.loadedPosts
+    }
   }
 }
 </script>

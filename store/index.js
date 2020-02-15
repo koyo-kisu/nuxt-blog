@@ -35,12 +35,12 @@ const createStore = () => {
                 // 'Promise()'が解決されるまで待つ
                 return axios.get('https://nuxt-blog0215.firebaseio.com/posts.json')
                     .then(res => {
-                        const postArray = []
+                        const postsArray = []
                         for (const key in res.data) {
                             // スプレッド構文：　配列やオブジェクトの要素を文字通り展開する
-                            postArray.push( { ...res.data[key], id: key } );
+                            postsArray.push( { ...res.data[key], id: key } );
                         }
-                        vuexContext.commit('setPosts', postArray);
+                        vuexContext.commit('setPosts', postsArray);
                     })
                     .catch(e => context.error(e));
             },
@@ -54,7 +54,7 @@ const createStore = () => {
                     ...post, 
                     updatedDate: new Date()
                 };
-                axios
+                return axios
                 .post('https://nuxt-blog0215.firebaseio.com/posts.json', createdPost)
                 .then(res => {
                     // 'mutations'の'addPost'を実行
@@ -65,9 +65,16 @@ const createStore = () => {
             },
 
             editPost(vuexContext, editedPost) {
-
-            }
-        },
+              return axios.put('https://nuxt-blog0215.firebaseio.com/' + 
+                editedPost.id +
+                '.json', editedPost
+              )
+              .then(res => {
+                vuexContext.commit('editPost', editedPost)
+              })
+              .catch(e => console.log(e))
+            },
+          },
 
         // 'state'の状態を調べる
         // 第1引数に'state'を持つ
@@ -79,4 +86,4 @@ const createStore = () => {
     })
 }
 
-export default createStore
+export default createStore;

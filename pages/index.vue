@@ -1,7 +1,7 @@
 <template>
   <div class="home-page">
     <section class="intro">
-      <h1>最新のテクノロジー記事</h1>
+      <h1>最新の投稿</h1>
     </section>
     <!-- 子コンポーネントに'loadedPosts'を渡す -->
     <PostList :posts="loadedPosts" />

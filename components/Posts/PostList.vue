@@ -11,7 +11,6 @@
             :previewText="post.previewText"
             :thumbnail="post.thumbnail"
             />
-            <div>aaaa</div>
     </section>
 </template>
 

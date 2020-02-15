@@ -20,7 +20,7 @@ export default {
     asyncData(context) {
         return axios
             .get(
-                "https://nuxt-blog.firebaseio.com/posts/" +
+                "https://nuxt-blog0215.firebaseio.com/posts/" +
                 context.params.postId +
                 ".json"
             )
@@ -33,20 +33,25 @@ export default {
     },
 
     methods: {
-        onSubmitted(editPost) {
-            axios.put('https://nuxt-blog0215.firebaseio.com/' + 
-                this.$route.params.postId +
-                '.json'
-            )
-            .then(res => {
-                this.$router.push('/admin')
-            })
-            .catch(e => console.log(e))
+        onSubmitted(editedPost) {
+            this.$store.dispatch('editPost', editedPost)
+            .then(() => {
+                this.$router.push('/admin');
+            });
         }
     }
 }
 </script>
 
-<style>
+<style scoped>
+.update_form {
+  width: 90%;
+  margin: 20px auto;
+}
 
+@media (min-width: 768px) {
+  .update_form {
+    width: 500px;
+  }
+}
 </style>
