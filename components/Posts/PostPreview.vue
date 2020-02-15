@@ -38,10 +38,6 @@ export default {
             type: String,
             required: true
         },
-        itemPosts: {
-            // type: Array,
-            required: true
-        }
     },
 
     computed: {

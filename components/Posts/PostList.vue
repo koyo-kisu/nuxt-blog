@@ -3,7 +3,7 @@
         <!-- 2.受け取った'posts'をfor文で繰り返し取り出す -->
         <!-- 3.さらに子コンポーネントに渡す -->
         <PostPreview
-            v-for="post in itemPosts"
+            v-for="post in posts"
             :key="post.id"
             :id="post.id"
             :is-admin="isAdmin"
@@ -11,6 +11,7 @@
             :previewText="post.previewText"
             :thumbnail="post.thumbnail"
             />
+            <div>aaaa</div>
     </section>
 </template>
 
@@ -24,9 +25,8 @@ export default {
 
     props: {
         // 1.親コンポーネントからのpostsを'props'で受け取る
-        itemPosts: {
-            // type: Array,
-            required: true
+        posts: {
+            type: Array,
         },
         isAdmin: {
             type: Boolean,

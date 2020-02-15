@@ -17,6 +17,7 @@ export default {
     },
     methods: {
         onSumbmitted(postData) {
+            // 'actions'の'addPost'を実行
             this.$store.dispatch('addPost', postData)
             .then(() => {
                 this.$router.push('/admin');

@@ -1,7 +1,7 @@
 <template>
   <div class="posts-page">
       <!-- 子コンポーネントに'loadedPosts'を渡す -->
-      <PostList :item-posts="loadedPosts" />
+      <PostList :posts="loadedPosts" />
   </div>
 </template>
 

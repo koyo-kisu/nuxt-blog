@@ -4,7 +4,7 @@
       <h1>最新のテクノロジー記事</h1>
     </section>
     <!-- 子コンポーネントに'loadedPosts'を渡す -->
-    <PostList :item-posts="loadedPosts" />
+    <PostList :posts="loadedPosts" />
   </div>
 </template>
 

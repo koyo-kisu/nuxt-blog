@@ -1,5 +1,5 @@
-import Vuex from 'vuex'
-import axios from 'axios'
+import Vuex from 'vuex';
+import axios from 'axios';
 
 const createStore = () => {
     return new Vuex.Store({
@@ -11,53 +11,54 @@ const createStore = () => {
         // 'state'を利用した処理を実行
         mutations: {
             setPosts(state, posts) {
-                state.loadedPosts = posts
+                state.loadedPosts = posts;
             },
             addPost(state, post) {
                 state.loadedPosts.push(post)
             },
-            editPost(state, editPost) {
+            editPost(state, editedPost) {
                 const postIndex = state.loadedPosts.findIndex(
-                    post => post.id === editPost.id
+                    post => post.id === editedPost.id
                 );
-                state.loadedPosts[postIndex] = editPost
+                state.loadedPosts[postIndex] = editedPost
             }
         },
 
         // 'mutations'を'commit'で実行する
         actions: {
-            nuxtServerinit(vuexContext, context) {
+            nuxtServerInit(vuexContext, context) {
                 // asyncData(): コンポーネントへデータをセットすることを目的
                 // →　返された値はコンポーネントのテンプレートからアクセス可能
                 // fetch(): ページがレンダリングされる前に、データをストアに入れるために使われる
                 // 共に第一引数に'context'を受け取る
                 // 必ず'Promise()'を返す
                 // 'Promise()'が解決されるまで待つ
-                return axios.get('https://nuxt-blog-20200215.firebaseio.com/posts.json')
+                return axios.get('https://nuxt-blog0215.firebaseio.com/posts.json')
                     .then(res => {
                         const postArray = []
                         for (const key in res.data) {
                             // スプレッド構文：　配列やオブジェクトの要素を文字通り展開する
-                            postArray.push( { ...res.data[key], id: key } )
+                            postArray.push( { ...res.data[key], id: key } );
                         }
-                        vuexContext.commit('setPosts', postArray)
+                        vuexContext.commit('setPosts', postArray);
                     })
                     .catch(e => context.error(e));
             },
 
             setPosts(vuexContext, posts) {
-                vuexContext.commit('setPosts', posts)
+                vuexContext.commit('setPosts', posts);
             },
 
             addPost(vuexContext, post) {
-                const createPost = {
+                const createdPost = {
                     ...post, 
                     updatedDate: new Date()
                 };
                 axios
-                .post('https://nuxt-blog0215.firebaseio.com/posts.json', createPost)
+                .post('https://nuxt-blog0215.firebaseio.com/posts.json', createdPost)
                 .then(res => {
-                    vuexContext.commit('addPost', {...createPost, id: res.data.name})
+                    // 'mutations'の'addPost'を実行
+                    vuexContext.commit('addPost', { ...createdPost, id: res.data.name })
                     this.$router.push('/admin');
                 })
                 .catch(e => console.log(e));
@@ -72,7 +73,7 @@ const createStore = () => {
         // 第1引数に'state'を持つ
         getters: {
             loadedPosts(state) {
-                return state.loadedPosts
+                return state.loadedPosts;
             }
         },
     })
