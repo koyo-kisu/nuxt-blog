@@ -1,17 +1,16 @@
 <template>
   <div class="posts-page">
       <!-- 子コンポーネントに'loadedPosts'を渡す -->
-      <PostList :posts="loadedPosts" />
-      <PostList :posts="loadedPosts" />
+      <PostList :item-posts="loadedPosts" />
   </div>
 </template>
 
 <script>
-import PostList from '@/components/Posts/PostList'
+import PostList from '@/components/Posts/PostList';
 
 export default {
     // admin用レイアウト使用宣言
-    layout: 'admin',
+    // layout: 'admin',
     components: {
         PostList,
     },
@@ -20,7 +19,7 @@ export default {
         loadedPosts() {
             return this.$store.getters.loadedPosts
         }
-    }
+    },
 };
 </script>
 

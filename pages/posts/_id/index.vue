@@ -17,27 +17,22 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
     layout: 'admin',
     // 'asyncData()'内では'this'は使用できないため'context.route.params.id'として外部からの情報を取得
-    asyncData(context, callback) {
-        setTimeout(() => {
-            callback(null, {
-                loadedPost: { 
-                    id: "1",
-                    title: "最初の投稿(ID: " + context.route.params.id + ")",
-                    previewText: '最初の投稿',
-                    isAdmin: true,
-                    author: '村上春樹',
-                    updatedDate: new Date(),
-                    content: 'texttexttexttexttexttexttexttexttexttexttexttext',
-                    thumbnail: 'https://bz-cdn.shoeisha.jp/static/images/article/3449/3449-top.jpg',
-                },
+    asyncData(context) {
+        return axios.get('https://nuxt-blog0215.firebaseio.com/posts/' + context.params.id + '.json' )
+            .then(res => {
+                return {
+                    loadedPost: res.data
+                }
             })
-        }, 1000)
+            .catch(e => context.error(e))
     }
 
-}
+};
 </script>
 
 <style scoped>

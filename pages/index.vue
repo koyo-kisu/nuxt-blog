@@ -1,15 +1,15 @@
 <template>
-  <div class="home_page">
+  <div class="home-page">
     <section class="intro">
       <h1>最新のテクノロジー記事</h1>
     </section>
     <!-- 子コンポーネントに'loadedPosts'を渡す -->
-    <PostList :posts="loadedPosts" />
+    <PostList :item-posts="loadedPosts" />
   </div>
 </template>
 
 <script>
-import PostList from '@/components/Posts/PostList'
+import PostList from '@/components/Posts/PostList';
 
 export default {
   components: {
@@ -25,9 +25,9 @@ export default {
   // data() {
   //   return {
   //     loadedPosts: []
-  //   }
+  //   };
   // },
-}
+};
 </script>
 
 <style scoped>
@@ -60,5 +60,14 @@ export default {
   .intro h1 {
     font-size: 2rem;
   }
+}
+
+.featured-posts {
+  display: flex;
+  padding: 20px;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
 </style>

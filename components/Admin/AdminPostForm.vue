@@ -5,7 +5,12 @@
         <AppControlInput v-model="editedPost.thumbnail">サムネイル</AppControlInput>
         <AppControlInput
             control-type="textarea"
-            v-model="editedPost.content">記事</AppControlInput>
+            v-model="editedPost.content"
+            >記事</AppControlInput>
+        <AppControlInput
+            control-type="textarea"
+            v-model="editedPost.previewText"
+            >記事見出し</AppControlInput>
         <AppButton type="submit">送信</AppButton>
         <AppButton
             type="button"
@@ -42,7 +47,8 @@ export default {
                     author: '',
                     title: '',
                     thumbnail: '',
-                    content: ''
+                    content: '',
+                    previewText: ''
                 }
         }
     },
@@ -53,8 +59,8 @@ export default {
             this.$router.push('/admin');
         },
         onSave: function() {
-            // 保存されたかコンソール上で確認
-            console.log(this.editedPost);
+            // 子から親へ継承
+            this.$emit('submit', this.editedPost)
         }
     }
 }

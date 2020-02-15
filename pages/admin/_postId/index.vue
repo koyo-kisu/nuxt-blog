@@ -2,13 +2,14 @@
   <div class="admin_post_page">
       <section class="update_form">
           <!-- 'post'属性を子コンポーネント'AdminPostForm'に渡す -->
-          <AdminPostForm :post="loadedPost" />
+          <AdminPostForm :post="loadedPost" @submit="onSubmitted" />
       </section>
   </div>
 </template>
 
 <script>
 import AdminPostForm from '@/components/Admin/AdminPostForm'
+import axios from 'axios'
 
 export default {
     layout: 'admin',
@@ -16,17 +17,33 @@ export default {
         AdminPostForm,
     },
 
-    data() {
-        return {
-            // プロパティを1つのオブジェクトとして扱うと簡単
-            loadedPost: {
-                author: 'Koyo',
-                title: 'お気に入り記事',
-                content: 'ぜひ読んでください！',
-                thumbnail: "https://bz-cdn.shoeisha.jp/static/images/article/3449/3449-top.jpg"
-            }
-        }
+    asyncData(context) {
+        return axios
+            .get(
+                "https://nuxt-blog.firebaseio.com/posts/" +
+                context.params.postId +
+                ".json"
+            )
+            .then(res => {
+                return {
+                    loadedPost: { ...res.data, id: context.params.postId }
+                };
+            })
+            .catch(e => context.error());
     },
+
+    methods: {
+        onSubmitted(editPost) {
+            axios.put('https://nuxt-blog0215.firebaseio.com/' + 
+                this.$route.params.postId +
+                '.json'
+            )
+            .then(res => {
+                this.$router.push('/admin')
+            })
+            .catch(e => console.log(e))
+        }
+    }
 }
 </script>
 
