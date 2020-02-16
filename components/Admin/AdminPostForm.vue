@@ -21,15 +21,7 @@
 </template>
 
 <script>
-import AppControlInput from '@/components/UI/AppControlInput'
-import AppButton from '@/components/UI/AppButton'
-
 export default {
-    components: {
-        AppControlInput,
-        AppButton,
-    },
-
     // 親から渡ってきた'post'を'props'で受け取る
     props: {
         post: {

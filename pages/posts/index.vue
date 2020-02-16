@@ -6,15 +6,9 @@
 </template>
 
 <script>
-import PostList from '@/components/Posts/PostList';
-
 export default {
     // admin用レイアウト使用宣言
     // layout: 'admin',
-    components: {
-        PostList,
-    },
-
     computed: {
         loadedPosts() {
             return this.$store.getters.loadedPosts
