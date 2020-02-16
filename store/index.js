@@ -35,7 +35,7 @@ const createStore = () => {
                 // 'Promise()'が解決されるまで待つ
                 return axios.get('https://nuxt-blog0215.firebaseio.com/posts.json')
                     .then(res => {
-                        const postsArray = []
+                        const postsArray = [];
                         for (const key in res.data) {
                             // スプレッド構文：　配列やオブジェクトの要素を文字通り展開する
                             postsArray.push( { ...res.data[key], id: key } );
@@ -59,13 +59,12 @@ const createStore = () => {
                 .then(res => {
                     // 'mutations'の'addPost'を実行
                     vuexContext.commit('addPost', { ...createdPost, id: res.data.name })
-                    this.$router.push('/admin');
                 })
                 .catch(e => console.log(e));
             },
 
             editPost(vuexContext, editedPost) {
-              return axios.put('https://nuxt-blog0215.firebaseio.com/' + 
+              return axios.put('https://nuxt-blog0215.firebaseio.com/posts/' + 
                 editedPost.id +
                 '.json', editedPost
               )
@@ -83,7 +82,7 @@ const createStore = () => {
                 return state.loadedPosts;
             }
         },
-    })
-}
+    });
+};
 
 export default createStore;
