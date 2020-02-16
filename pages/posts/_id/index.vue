@@ -4,8 +4,8 @@
           <section class="post">
               <h1 class="post_title">{{ loadedPost.title }}</h1>
               <div class="post_details">
-                  <div class="post_detail">{{ loadedPost.updatedDate }}</div>
-                  <div class="post_detail">著者 {{ loadedPost.author }}</div>
+                  <div class="post_detail">更新日: {{ loadedPost.updatedDate | date }}</div>
+                  <div class="post_detail">著者: {{ loadedPost.author }}</div>
               </div>
               <p class="post_content">{{ loadedPost.content }}</p>
           </section>
