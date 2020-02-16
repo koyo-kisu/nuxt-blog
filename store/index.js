@@ -33,7 +33,7 @@ const createStore = () => {
                 // 共に第一引数に'context'を受け取る
                 // 必ず'Promise()'を返す
                 // 'Promise()'が解決されるまで待つ
-                return axios.get('https://nuxt-blog0215.firebaseio.com/posts.json')
+                return axios.get( process.env.baseUrl + '/posts.json')
                     .then(res => {
                         const postsArray = [];
                         for (const key in res.data) {
@@ -55,7 +55,7 @@ const createStore = () => {
                     updatedDate: new Date()
                 };
                 return axios
-                .post('https://nuxt-blog0215.firebaseio.com/posts.json', createdPost)
+                .post( process.env.baseUrl + '/posts.json', createdPost)
                 .then(res => {
                     // 'mutations'の'addPost'を実行
                     vuexContext.commit('addPost', { ...createdPost, id: res.data.name })
@@ -64,7 +64,7 @@ const createStore = () => {
             },
 
             editPost(vuexContext, editedPost) {
-              return axios.put('https://nuxt-blog0215.firebaseio.com/posts/' + 
+              return axios.put( process.env.baseUrl + '/posts/' + 
                 editedPost.id +
                 '.json', editedPost
               )

@@ -23,7 +23,7 @@ export default {
     layout: 'admin',
     // 'asyncData()'内では'this'は使用できないため'context.route.params.id'として外部からの情報を取得
     asyncData(context) {
-        return axios.get('https://nuxt-blog0215.firebaseio.com/posts/' + context.params.id + '.json' )
+        return axios.get( process.env.baseUrl + '/posts/' + context.params.id + '.json' )
             .then(res => {
                 return {
                     loadedPost: res.data
