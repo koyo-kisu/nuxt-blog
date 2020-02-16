@@ -73,7 +73,7 @@ export default {
     }
 }
 
-.post_details {
+.post_detail {
     color: rgb(88, 88, 88);
     margin: 0 10px;
 }
