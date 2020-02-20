@@ -12,6 +12,14 @@
                   <li class="nav-item"><nuxt-link to="/posts">ブログ</nuxt-link></li>
                   <li class="nav-item"><nuxt-link to="/about">概要</nuxt-link></li>
                   <li class="nav-item"><nuxt-link to="/admin">管理</nuxt-link></li>
+                  <div class="isLogin_wrap">
+                    <div v-if="!isLogin" @click="googleLogin">
+                      <div>ログイン</div>
+                    </div>
+                    <div v-else @click="logOut">
+                      <div>ログアウト</div>
+                    </div>
+                  </div>
               </ul>
           </div>
       </header>
@@ -20,11 +28,49 @@
 
 <script>
 import TheSideNavToggle from '@/components/Navigation/TheSideNavToggle'
+import firebase from "@/plugins/firebase";
 
 export default {
   name: "TheHeader",
+  
   components: {
     TheSideNavToggle
+  },
+
+  data() {
+    return {
+      isLogin: false,
+      user: []
+    }
+  },
+
+  mounted: function() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.isLogin = true;
+        this.user = user;
+        console.log(user)
+      } else {
+        this.isLogin = false;
+        this.user = [];
+      }
+    })
+  },
+
+  methods: {
+    googleLogin() {
+      const provider = new firebase.auth.GoogleAuthProvider()
+      firebase.auth().signInWithRedirect(provider)
+        .then(() => {
+          this.$router.push('/');
+        })
+        .catch((error) => {
+          window.alert(error);
+        })
+    },
+    logOut() {
+      firebase.auth().signOut();
+    }
   }
 }
 </script>
@@ -63,6 +109,13 @@ export default {
 
 .navigation-items {
   display: none;
+}
+
+.isLogin_wrap {
+  color: white;
+  /* border: 1px solid white; */
+  padding: 3px;
+  margin-left: 15px;
 }
 
 @media (min-width: 768px) {

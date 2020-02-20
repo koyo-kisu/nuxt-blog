@@ -50,6 +50,9 @@ export default {
     googleLogin: function() {
       const provider = new firebase.auth.GoogleAuthProvider()
       firebase.auth().signInWithRedirect(provider)
+        .then(() => {
+          this.$router.push('/')
+        })
         .catch((error) => {
           window.alert(error)
         })
@@ -76,6 +79,7 @@ export default {
 .image-container {
   display: flex;
   justify-content: center;
+  cursor: pointer;
 }
 
 .google-image {
