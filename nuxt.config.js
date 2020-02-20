@@ -56,11 +56,16 @@ export default {
 
   // 環境変数を指定
   env: {
-    baseUrl: process.env.BASE_URL || 'https://nuxt-blog0215.firebaseio.com'
+    baseUrl: process.env.BASE_URL || 'https://nuxt-blog0215.firebaseio.com',
+    fbApiKey: 'AIzaSyCN2vKQJutfN7I3b5szFcFcvOxpUaWnuao'
   },
 
   transition: {
     name: 'fade',
     mode: 'out-in'
-  }
+  },
+
+  // router: {
+  //   middleware: 'log'
+  // }
 }

@@ -1,7 +1,22 @@
 <template>
   <div class="admin-auth-page">
+    <div v-if="!isWaiting">
+      <p>読み込み中</p>
+    </div>
+    <div v-else>
+      <div class="image-container">
+        <img class="google-image" src="~/assets/images/btn_google_signin_light_normal_web@2x.png" alt="Googleでログイン" v-on:click="googleLogin">
+      </div>
+    </div>
+  </div>
+</template>
+
+
+<!--
+<template>
+  <div class="admin-auth-page">
     <div class="auth-container">
-      <form>
+      <form @submit.prevent="onSubmit">
         <AppControlInput type="email">メールアドレス</AppControlInput>
         <AppControlInput type="password">パスワード</AppControlInput>
         <AppButton type="submit">{{ isLogin ? 'ログイン' : '新規登録' }}</AppButton>
@@ -14,17 +29,32 @@
     </div>
   </div>
 </template>
+-->
 
 <script>
+import axios from 'axios';
+import firebase from '@/plugins/firebase';
+
 export default {
   name: 'AdminAuthPage',
   layout: 'admin',
 
   data() {
     return {
-      isLogin: true
+      isLogin: true,
+      isWaiting: true,
     }
   },
+
+  methods: {
+    googleLogin: function() {
+      const provider = new firebase.auth.GoogleAuthProvider()
+      firebase.auth().signInWithRedirect(provider)
+        .catch((error) => {
+          window.alert(error)
+        })
+    }
+  }
 }
 </script>
 
@@ -41,5 +71,20 @@ export default {
   margin: auto;
   padding: 10px;
   box-sizing: border-box;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+}
+
+.google-image {
+  width: 170px;
+  height: 40px;
+}
+
+img .avater{
+  width: 70%;
+  cursor: pointer;
 }
 </style>

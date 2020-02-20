@@ -9,6 +9,7 @@
 export default {
     // admin用レイアウト使用宣言
     // layout: 'admin',
+    middleware: 'log',
     computed: {
         loadedPosts() {
             return this.$store.getters.loadedPosts
