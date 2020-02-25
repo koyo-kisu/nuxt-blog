@@ -3,7 +3,8 @@
     <div v-if="!isWaiting">
       <p>読み込み中</p>
     </div>
-    <div v-else>
+    <div v-else class="sns-login-container">
+      <div class="sns-btns">SNSログイン</div>
       <div class="image-container">
         <img class="google-image" src="~/assets/images/btn_google_signin_light_normal_web@2x.png" alt="Googleでログイン" v-on:click="googleLogin">
       </div>
@@ -70,16 +71,26 @@ export default {
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0 2px 2px #ccc;
-  width: 300px;
+  width: 500px;
   margin: auto;
   padding: 10px;
   box-sizing: border-box;
+}
+
+.sns-login-container {
+  padding: 20px;
 }
 
 .image-container {
   display: flex;
   justify-content: center;
   cursor: pointer;
+}
+
+.sns-btns {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 10px;
 }
 
 .google-image {

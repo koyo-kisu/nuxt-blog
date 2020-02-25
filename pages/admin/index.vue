@@ -3,6 +3,7 @@
       <section class="new_post">
         <!-- 'click'アクション後'new-post'へ遷移 -->
         <AppButton @click="$router.push('/admin/new-post')">投稿する</AppButton>
+        <AppButton @click="$router.push('/')">ホームに戻る</AppButton>
       </section>
       <section class="existing_posts">
         <h1>過去の投稿</h1>
@@ -16,6 +17,8 @@
 <script>
 export default {
   layout: 'admin',
+
+  middleware: 'auth',
 
   computed: {
     loadedPosts() {

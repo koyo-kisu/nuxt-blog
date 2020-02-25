@@ -2,6 +2,7 @@
   <div>
     <!-- 'sidenavToggle'イベントを受け取り'displaySidenav'メソッドを呼び出す -->
     <TheHeader @sidenavToggle="displaySidenav = !displaySidenav" />
+    <!-- <TheMainnav /> -->
     <!-- 'close'イベントを受け取り'displaySidenav'メソッドを呼び出す -->
     <TheSidenav
       :show="displaySidenav"
@@ -13,11 +14,13 @@
 <script>
 import TheHeader from '@/components/Navigation/TheHeader'
 import TheSidenav from '@/components/Navigation/TheSidenav'
+import TheMainnav from '@/components/Navigation/TheMainnav'
 
 export default {
   components: {
     TheHeader,
     TheSidenav,
+    TheMainnav,
   },
   data() {
     return {

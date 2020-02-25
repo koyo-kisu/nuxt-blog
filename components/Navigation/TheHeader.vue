@@ -29,12 +29,14 @@
 <script>
 import TheSideNavToggle from '@/components/Navigation/TheSideNavToggle'
 import firebase from "@/plugins/firebase";
+import TheMainnav from '@/components/Navigation/TheMainnav'
 
 export default {
   name: "TheHeader",
   
   components: {
-    TheSideNavToggle
+    TheSideNavToggle,
+    TheMainnav
   },
 
   data() {
